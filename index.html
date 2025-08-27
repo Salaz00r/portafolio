@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JoshuaDev – Portafolio de Sistemas | Soluciones de Software</title>
+  <meta name="description" content="Portafolio de sistemas desarrollados por JoshuaDev – Soluciones especializadas para diferentes industrias." />
+  <style>
+    :root{
+      --bg:#0e1116;          
+      --card:#151a22;        
+      --soft:#1f2630;        
+      --tx:#e7ecf3;          
+      --muted:#9aa5b1;       
+      --brand:#4f7cff;       
+      --accent:#ff6b6b;      
+      --success:#2ecc71;
+      --warning:#f39c12;      
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --glow: 0 0 20px rgba(79,124,255,.3);
+    }
+    
+    *{box-sizing:border-box}
+    html{scroll-behavior: smooth;}
+    html,body{height:100%}
+    body{
+      margin:0; 
+      background:
+        radial-gradient(1200px 800px at 80% -10%,rgba(79,124,255,.08),transparent 60%),
+        radial-gradient(900px 600px at -10% 10%,rgba(255,107,107,.06),transparent 60%), 
+        var(--bg);
+      color:var(--tx); 
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
+      overflow-x: hidden;
+    }
+    
+    .wrap{max-width:1200px;margin:0 auto;padding:32px; position: relative;}
+    
+    /* Animaciones */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .animate-in {
+      animation: slideUp 0.6s ease-out forwards;
+    }
+    
+    .animate-left {
+      animation: slideInLeft 0.6s ease-out forwards;
+    }
+    
+    .animate-right {
+      animation: slideInRight 0.6s ease-out forwards;
+    }
+    
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Header */
+    header{
+      display:flex; align-items:center; gap:16px; padding:16px 0 32px; 
+      border-bottom:1px solid var(--soft);
+      position: relative;
+    }
+    
+    .logo{
+      width:60px;height:60px;border-radius:16px;display:grid;place-items:center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      box-shadow: var(--shadow), 0 0 15px rgba(79,124,255,.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .logo::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      z-index: 0;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow), 0 0 25px rgba(79,124,255,.5);
+    }
+    
+    .logo img{
+      width: 90%; height: 90%; object-fit: contain; border-radius: 12px; 
+      position: relative; z-index: 1; filter: brightness(1.1) contrast(1.1);
+    }
+    .logo-fallback{font-weight:800;font-size:22px;color:var(--brand)}
+    
+    .brand{display:flex;flex-direction:column}
+    .brand h1{margin:0;font-size:22px;letter-spacing:.5px; 
+      background: linear-gradient(135deg, var(--tx), var(--brand));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .brand span{color:var(--muted);font-size:13px}
+
+    .nav{margin-left: auto; display: flex; gap: 20px;}
+    .nav a{color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.3s ease;}
+    .nav a:hover{color: var(--brand);}
+
+    /* Hero */
+    .hero{
+      padding: 60px 0; text-align: center;
+    }
+    
+    .hero h1{
+      font-size: 48px; margin: 0 0 20px; font-weight: 800;
+      background: linear-gradient(135deg, var(--tx), var(--brand), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero p{
+      font-size: 20px; color: var(--muted); margin: 0 0 30px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    
+    .hero-stats{
+      display: flex; justify-content: center; gap: 40px; margin-top: 40px;
+    }
+    
+    .stat{text-align: center;}
+    .stat-number{font-size: 32px; font-weight: 800; color: var(--brand); display: block;}
+    .stat-label{color: var(--muted); font-size: 14px;}
+
+    /* Card base */
+    .card{
+      background:var(--card); border:1px solid var(--soft); border-radius:var(--radius); 
+      padding:28px; box-shadow:var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow), 0 0 25px rgba(79,124,255,.15);
+    }
+
+    /* Projects Section */
+    .projects{
+      margin: 80px 0;
+    }
+    
+    .section-title{
+      font-size: 36px; font-weight: 800; text-align: center; margin: 0 0 50px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 3px;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      border-radius: 2px;
+    }
+    
+    .projects-grid{
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
+    }
+    
+    .project-card{
+      background: var(--card); border: 1px solid var(--soft); border-radius: var(--radius);
+      overflow: hidden; transition: all 0.3s ease; position: relative;
+    }
+    
+    .project-card.featured{
+      border-color: var(--brand);
+      box-shadow: var(--shadow), 0 0 20px rgba(79,124,255,.2);
+    }
+    
+    .project-card.featured::before{
+      content: '⭐ DESTACADO';
+      position: absolute; top: 15px; right: 15px; z-index: 10;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      color: white; padding: 4px 12px; border-radius: 12px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    }
+    
+    .project-card:hover{
+      transform: translateY(-8px);
+      box-shadow: var(--shadow), 0 0 30px rgba(79,124,255,.25);
+    }
+    
+    .project-header{
+      background: linear-gradient(135deg, rgba(79,124,255,.1), rgba(21,26,34,.9));
+      padding: 25px; border-bottom: 1px solid var(--soft);
+    }
+    
+    .project-title{
+      font-size: 22px; font-weight: 700; margin: 0 0 8px;
+      color: var(--tx);
+    }
+    
+    .project-subtitle{
+      color: var(--muted); font-size: 14px; margin: 0 0 15px;
+    }
+    
+    .project-tags{
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    
+    .tag{
+      background: rgba(79,124,255,.15); border: 1px solid rgba(79,124,255,.3);
+      color: var(--brand); padding: 4px 8px; border-radius: 6px;
+      font-size: 12px; font-weight: 500;
+    }
+    
+    .project-body{
+      padding: 25px;
+    }
+    
+    .project-description{
+      color: var(--muted); line-height: 1.6; margin: 0 0 20px;
+    }
+    
+    .project-features{
+      margin: 0 0 25px; padding: 0; list-style: none;
+    }
+    
+    .project-features li{
+      color: var(--muted); padding: 4px 0; padding-left: 20px;
+      position: relative; font-size: 14px;
+    }
+    
+    .project-features li::before{
+      content: "✓"; position: absolute; left: 0; color: var(--success);
+    }
+    
+    .project-pricing{
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px; background: rgba(79,124,255,.05);
+      border-radius: 12px; margin-bottom: 20px;
+    }
+    
+    .project-price{
+      font-size: 20px; font-weight: 700; color: var(--brand);
+    }
+    
+    .project-status{
+      padding: 4px 12px; border-radius: 20px; font-size: 12px;
+      font-weight: 600; text-transform: uppercase;
+    }
+    
+    .status-available{background: rgba(46,204,113,.2); color: var(--success);}
+    .status-development{background: rgba(243,156,18,.2); color: var(--warning);}
+    .status-planning{background: rgba(155,165,177,.2); color: var(--muted);}
+    
+    .project-actions{
+      display: flex; gap: 12px;
+    }
+
+    /* Buttons */
+    .btn{
+      appearance:none; border:none; padding:10px 16px; border-radius:12px; 
+      font-weight:600; cursor:pointer; transition: all 0.3s ease;
+      position: relative; overflow: hidden; font-size: 14px;
+      text-decoration: none; display: inline-flex; align-items: center;
+      gap: 6px;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand), #6366f1); 
+      color:#fff;
+      box-shadow: 0 4px 15px rgba(79,124,255,.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79,124,255,.4);
+    }
+    
+    .btn-secondary{
+      background: rgba(79,124,255,.1); color: var(--brand); 
+      border: 1px solid rgba(79,124,255,.3);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(79,124,255,.2);
+      border-color: var(--brand);
+    }
+    
+    .btn-ghost{
+      background:transparent; color:var(--tx); border:1px solid var(--soft);
+    }
+    
+    .btn-ghost:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+      background: rgba(79,124,255,.05);
+    }
+
+    /* Services */
+    .services{
+      margin: 80px 0; padding: 60px 0;
+      background: linear-gradient(135deg, rgba(79,124,255,.03), rgba(21,26,34,.5));
+      border-radius: 20px;
+    }
+    
+    .services-grid{
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .service-card{
+      background: var(--card); padding: 25px; border-radius: 16px;
+      border: 1px solid var(--soft); transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .service-card:hover{
+      transform: translateY(-5px);
+      border-color: rgba(79,124,255,.3);
+    }
+    
+    .service-icon{
+      font-size: 48px; margin-bottom: 15px; display: block;
+    }
+    
+    .service-card h3{
+      font-size: 20px; margin: 0 0 10px; color: var(--tx);
+    }
+    
+    .service-card p{
+      color: var(--muted); margin: 0; line-height: 1.5;
+    }
+
+    /* Contact CTA */
+    .contact-cta{
+      margin: 80px 0; text-align: center;
+      padding: 60px 30px;
+      background: linear-gradient(135deg, rgba(79,124,255,.08), rgba(255,107,107,.05));
+      border-radius: 20px; border: 1px solid var(--soft);
+    }
+    
+    .contact-cta h2{
+      font-size: 32px; margin: 0 0 15px; color: var(--tx);
+    }
+    
+    .contact-cta p{
+      font-size: 18px; color: var(--muted); margin: 0 0 30px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:60px; padding:30px 0; border-top:1px solid var(--soft); 
+      color:var(--muted); font-size:14px; text-align: center;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--brand), transparent);
+    }
+
+    /* Scroll effects */
+    .scroll-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .scroll-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .wrap{padding: 20px;}
+      .hero h1{font-size: 36px;}
+      .hero p{font-size: 18px;}
+      .hero-stats{flex-wrap: wrap; gap: 20px;}
+      .projects-grid{grid-template-columns: 1fr;}
+      .services-grid{grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));}
+      .nav{display: none;}
+    }
+
+    @media print {
+      .btn, .nav { display: none !important; }
+      body { background: white !important; color: black !important; }
+      .card { box-shadow: none !important; border: 1px solid #ddd !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="animate-in">
+      <div class="logo float">
+        <img src="./assets/image/LogoJoshua.png" alt="JoshuaDev logo" onerror="this.remove();this.parentElement.insertAdjacentHTML('beforeend','<span class=\'logo-fallback\'>JD</span>')"/>
+      </div>
+      <div class="brand">
+        <h1>JoshuaDev</h1>
+        <span>Soluciones de Software</span>
+      </div>
+      <nav class="nav">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero scroll-fade">
+      <h1>Desarrollamos Software que Impulsa tu Negocio</h1>
+      <p>Sistemas especializados para diferentes industrias, diseñados para optimizar procesos y aumentar la productividad de tu empresa.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Sistemas Desarrollados</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Clientes Satisfechos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">99%</span>
+          <span class="stat-label">Tiempo de Actividad</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="proyectos" class="projects scroll-fade">
+      <h2 class="section-title">🚀 Nuestros Sistemas</h2>
+      <div class="projects-grid">
+        
+        <!-- Fresh Barber Supply - Featured -->
+        <div class="project-card featured">
+          <div class="project-header">
+            <h3 class="project-title">Fresh Barber Supply</h3>
+            <p class="project-subtitle">Sistema de Gestión para Barberías</p>
+            <div class="project-tags">
+              <span class="tag">Inventario</span>
+              <span class="tag">Ventas</span>
+              <span class="tag">Reportes</span>
+              <span class="tag">PWA</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Sistema completo de gestión para barberías con inventario, ventas con descuentos, reportes en PDF y escáner de códigos de barras. Diseñado específicamente para las necesidades del negocio de barbería.
+            </p>
+            <ul class="project-features">
+              <li>Gestión completa de inventario y categorías</li>
+              <li>Sistema de ventas con múltiples descuentos</li>
+              <li>Generación de reportes y gráficas en PDF</li>
+              <li>Escáner de códigos de barras integrado</li>
+              <li>PWA instalable en cualquier dispositivo</li>
+              <li>Autenticación JWT y seguridad avanzada</li>
+            </ul>
+            <div class="project-pricing">
+              <div class="project-price">Desde $7,500 MXN</div>
+              <div class="project-status status-available">Disponible</div>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-primary" onclick="showQuoteModal('Fresh Barber Supply')">
+                📋 Solicitar Cotización
+              </button>
+              <a href="https://barbershop-pwa-frontend.onrender.com/" target="_blank" class="btn btn-secondary">👀 Ver Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Restaurant POS -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">RestaurantPOS Pro</h3>
+            <p class="project-subtitle">Sistema POS para Restaurantes</p>
+            <div class="project-tags">
+              <span class="tag">POS</span>
+              <span class="tag">Comandas</span>
+              <span class="tag">Mesas</span>
+              <span class="tag">Reportes</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Sistema punto de venta especializado para restaurantes con gestión de mesas, comandas de cocina, control de inventario y reportes de ventas detallados.
+            </p>
+            <ul class="project-features">
+              <li>Gestión de mesas y reservaciones</li>
+              <li>Sistema de comandas para cocina</li>
+              <li>Control de inventario especializado</li>
+              <li>Reportes de ventas y productos más vendidos</li>
+              <li>Integración con impresoras térmicas</li>
+            </ul>
+            <div class="project-pricing">
+              <div class="project-price">Desde $9,500 MXN</div>
+              <div class="project-status status-development">En Desarrollo</div>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-secondary" onclick="showInterestModal('RestaurantPOS Pro')">
+                💬 Mostrar Interés
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pharmacy System -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">PharmaControl</h3>
+            <p class="project-subtitle">Sistema para Farmacias</p>
+            <div class="project-tags">
+              <span class="tag">Medicamentos</span>
+              <span class="tag">Caducidades</span>
+              <span class="tag">Recetas</span>
+              <span class="tag">Proveedores</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Sistema especializado para farmacias con control de medicamentos, alertas de caducidades, gestión de recetas médicas y control de proveedores.
+            </p>
+            <ul class="project-features">
+              <li>Control de medicamentos y similares</li>
+              <li>Alertas de caducidades automáticas</li>
+              <li>Gestión de recetas médicas</li>
+              <li>Control de proveedores y compras</li>
+              <li>Reportes regulatorios</li>
+            </ul>
+            <div class="project-pricing">
+              <div class="project-price">Desde $8,500 MXN</div>
+              <div class="project-status status-planning">En Planeación</div>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-secondary" onclick="showInterestModal('PharmaControl')">
+                💬 Mostrar Interés
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gym Management -->
+        <div class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">GymFlow</h3>
+            <p class="project-subtitle">Sistema de Gestión para Gimnasios</p>
+            <div class="project-tags">
+              <span class="tag">Membresías</span>
+              <span class="tag">Clases</span>
+              <span class="tag">Pagos</span>
+              <span class="tag">Acceso</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <p class="project-description">
+              Sistema completo para gimnasios con gestión de membresías, programación de clases, control de pagos y sistema de acceso con tarjetas o códigos QR.
+            </p>
+            <ul class="project-features">
+              <li>Gestión de membresías y planes</li>
+              <li>Programación de clases y entrenamientos</li>
+              <li>Control de pagos y vencimientos</li>
+              <li>Sistema de acceso con QR/tarjetas</li>
+              <li>Reportes financieros detallados</li>
+            </ul>
+            <div class="project-pricing">
+              <div class="project-price">Desde $10,500 MXN</div>
+              <div class="project-status status-planning">En Planeación</div>
+            </div>
+            <div class="project-actions">
+              <button class="btn btn-secondary" onclick="showInterestModal('GymFlow')">
+                💬 Mostrar Interés
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="servicios" class="services scroll-fade">
+      <h2 class="section-title">💼 Nuestros Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">🎨</span>
+          <h3>Desarrollo Personalizado</h3>
+          <p>Creamos sistemas desde cero adaptados específicamente a las necesidades de tu industria y modelo de negocio.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🔧</span>
+          <h3>Mantenimiento & Hosting</h3>
+          <p>Ofrecemos hosting confiable 24/7, actualizaciones regulares y soporte técnico continuo para tu sistema.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">📚</span>
+          <h3>Capacitación & Soporte</h3>
+          <p>Capacitamos a tu equipo para usar el sistema efectivamente y proporcionamos soporte técnico cuando lo necesites.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">📊</span>
+          <h3>Análisis & Reportes</h3>
+          <p>Implementamos sistemas de reportes avanzados que te ayuden a tomar mejores decisiones de negocio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section id="contacto" class="contact-cta scroll-fade">
+      <h2>¿Listo para Digitalizar tu Negocio?</h2>
+      <p>Contáctanos y descubre cómo podemos crear la solución perfecta para tu empresa</p>
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://wa.me/+526671690570" class="btn btn-primary">📱 WhatsApp</a>
+        <a href="mailto:josua013@hotmailcom" class="btn btn-secondary">📧 Email</a>
+        <button class="btn btn-ghost" onclick="window.print()">📄 Imprimir Portafolio</button>
+      </div>
+    </section>
+
+    <footer class="scroll-fade">
+      <p>© <span id="year"></span> JoshuaDev – Soluciones de Software | Transformando Ideas en Sistemas</p>
+    </footer>
+  </div>
+
+  <!-- Modal para cotizaciones -->
+  <div id="quoteModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:var(--card); border:1px solid var(--soft); border-radius:var(--radius); padding:30px; max-width:500px; width:90%;">
+      <h3 style="margin:0 0 20px; color:var(--tx);">📋 Solicitar Cotización - <span id="modalProject"></span></h3>
+      <form id="quoteForm">
+        <div style="display:grid; gap:15px;">
+          <input type="text" id="clientName" placeholder="Nombre de tu empresa" required style="padding:12px; border:1px solid var(--soft); border-radius:8px; background:var(--bg); color:var(--tx);">
+          <input type="text" id="contactName" placeholder="Nombre de contacto" required style="padding:12px; border:1px solid var(--soft); border-radius:8px; background:var(--bg); color:var(--tx);">
+          <input type="email" id="email" placeholder="Email" required style="padding:12px; border:1px solid var(--soft); border-radius:8px; background:var(--bg); color:var(--tx);">
+          <input type="tel" id="phone" placeholder="Teléfono" required style="padding:12px; border:1px solid var(--soft); border-radius:8px; background:var(--bg); color:var(--tx);">
+          <textarea id="requirements" placeholder="Cuéntanos sobre tus necesidades específicas..." rows="4" style="padding:12px; border:1px solid var(--soft); border-radius:8px; background:var(--bg); color:var(--tx); resize:vertical;"></textarea>
+        </div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+          <button type="button" onclick="closeQuoteModal()" class="btn btn-ghost">Cancelar</button>
+          <button type="submit" class="btn btn-primary">📧 Enviar Solicitud</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Fecha automática
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Animaciones en scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+
+    // Modal functions
+    function showQuoteModal(projectName) {
+      document.getElementById('modalProject').textContent = projectName;
+      const modal = document.getElementById('quoteModal');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeQuoteModal() {
+      document.getElementById('quoteModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+      document.getElementById('quoteForm').reset();
+    }
+
+    function showInterestModal(projectName) {
+      alert(`¡Gracias por tu interés en ${projectName}! Te contactaremos cuando esté disponible. Por ahora, puedes escribirnos a WhatsApp para más información.`);
+    }
+
+    // Handle quote form submission
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        project: document.getElementById('modalProject').textContent,
+        clientName: document.getElementById('clientName').value,
+        contactName: document.getElementById('contactName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        requirements: document.getElementById('requirements').value
+      };
+
+      // Create WhatsApp message
+      const message = `🚀 *Nueva Solicitud de Cotización*
+
+📋 *Proyecto:* ${formData.project}
+🏢 *Empresa:* ${formData.clientName}
+👤 *Contacto:* ${formData.contactName}
+📧 *Email:* ${formData.email}
+📱 *Teléfono:* ${formData.phone}
+
+📝 *Requerimientos:*
+${formData.requirements}
+
+---
+_Solicitud generada desde JoshuaDev Portfolio_`;
+
+      const whatsappUrl = `https://wa.me/+526677123456?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+      
+      closeQuoteModal();
+      
+      // Show success message
+      const successDiv = document.createElement('div');
+      successDiv.innerHTML = `
+        <div style="position:fixed; top:20px; right:20px; background:var(--success); color:white; padding:15px 20px; border-radius:12px; z-index:1001; box-shadow:var(--shadow);">
+          ✅ Solicitud enviada! Te contactaremos pronto.
+        </div>
+      `;
+      document.body.appendChild(successDiv);
+      
+      setTimeout(() => {
+        successDiv.remove();
+      }, 5000);
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('quoteModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeQuoteModal();
+      }
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Dynamic stats counter (optional enhancement)
+    function animateStats() {
+      const stats = document.querySelectorAll('.stat-number');
+      stats.forEach(stat => {
+        const target = parseInt(stat.textContent);
+        const increment = target / 50;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            stat.textContent = target + (stat.textContent.includes('%') ? '%' : '+');
+            clearInterval(timer);
+          } else {
+            stat.textContent = Math.floor(current) + (stat.textContent.includes('%') ? '%' : '+');
+          }
+        }, 50);
+      });
+    }
+
+    // Trigger stats animation when hero is visible
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          heroObserver.unobserve(entry.target);
+        }
+      });
+    });
+
+    heroObserver.observe(document.querySelector('.hero'));
+
+    // Add to favorites functionality (optional)
+    function addToFavorites() {
+      if (window.sidebar && window.sidebar.addPanel) {
+        window.sidebar.addPanel(document.title, window.location.href, '');
+      } else if (window.external && ('AddFavorite' in window.external)) {
+        window.external.AddFavorite(window.location.href, document.title);
+      } else if (window.opera && window.print) {
+        const elem = document.createElement('a');
+        elem.setAttribute('href', window.location.href);
+        elem.setAttribute('title', document.title);
+        elem.setAttribute('rel', 'sidebar');
+        elem.click();
+      } else {
+        alert('Presiona Ctrl+D (Windows) o Cmd+D (Mac) para agregar esta página a favoritos');
+      }
+    }
+
+    // Print optimization
+    window.addEventListener('beforeprint', () => {
+      document.body.classList.add('printing');
+    });
+
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('printing');
+    });
+  </script>
+
+  <style>
+    /* Print styles */
+    @media print {
+      .btn, .nav, #quoteModal { display: none !important; }
+      body { 
+        background: white !important; 
+        color: black !important; 
+        font-size: 12px !important;
+      }
+      .card, .project-card { 
+        box-shadow: none !important; 
+        border: 1px solid #ddd !important; 
+        break-inside: avoid;
+        margin-bottom: 20px;
+      }
+      .hero h1 { font-size: 28px !important; }
+      .section-title { font-size: 24px !important; }
+      .project-title { font-size: 18px !important; }
+      .projects-grid { grid-template-columns: 1fr !important; }
+      .hero-stats { display: none !important; }
+    }
+    
+    /* Loading animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading {
+      border: 3px solid var(--soft);
+      border-top: 3px solid var(--brand);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+  </style>
